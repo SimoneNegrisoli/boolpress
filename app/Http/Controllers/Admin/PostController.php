@@ -10,6 +10,8 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class PostController extends Controller
 {
@@ -45,6 +47,11 @@ class PostController extends Controller
         $userId = Auth::id();
         //aggiungo id utente a form data
         $formData['user_id'] = $userId;
+
+        if ($request->hasFile('image')) {
+            $img_path = Storage::put('uploads', $formData['image']);
+            $formData['image'] = $img_path;
+        }
 
         $post = Post::create($formData);
         return redirect()->route('admin.posts.show', $post->id);

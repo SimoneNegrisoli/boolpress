@@ -24,7 +24,7 @@ class StorePostRequest extends FormRequest
         return [
             'title' => ['required', 'min:3', 'max:200', 'unique:posts'],
             'body' => ['nullable'],
-            'image' => ['nullable', 'url']
+            'image' => ['nullable',]
         ];
     }
 
@@ -36,7 +36,6 @@ class StorePostRequest extends FormRequest
             'title.min' => 'il titolo deve essere di almeno :min',
             'title.max' => 'il titolo deve essere di almeno :max',
             'title.unique' => 'il titolo deve essere unico',
-            'image.url' => 'L\'immagine deve essere di tipo url',
         ];
     }
 }
